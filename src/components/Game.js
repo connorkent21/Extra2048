@@ -85,7 +85,7 @@ class Game extends Component {
     this.state.gameGrid.forEach(row => {
       let emptyBlock = 0;
       row.forEach(block => {
-        if (block != 0 && row.indexOf(block) != emptyBlock) {
+        if (block != 0) {
             row[emptyBlock] = block;
             block = 0;
             // Checks to see if the 2 blocks should merge
@@ -137,7 +137,7 @@ class Game extends Component {
       newNumber = 4;
     }
     let index = zeroList[Math.Floor(Math.random() * (zeroList.size() + 1))];
-    gameGrid[newNumber]
+    gameGrid[parseInt(newNumber / 4)][newNumber % 4] = newNumber;
   }
 
   render() {
