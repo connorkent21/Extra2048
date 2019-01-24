@@ -12,7 +12,7 @@ class Game extends Component {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-      ];
+      ],
 
     }
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -123,12 +123,10 @@ class Game extends Component {
 
   addNumber(){
     let zeroList;
-    let count;
     this.state.gameGrid.forEach(row => {
       row.forEach(block => {
         if (block == 0) {
           zeroList.push(gameGrid.indexOf(row) * 4 + row.indexOf(block));
-          count++;
         }
       })
     })
@@ -137,10 +135,9 @@ class Game extends Component {
     let randomNumber =  Math.random() * 9;
     if (Math.floor(randomNumber) == 8) {
       newNumber = 4;
-
-    if (Math.Floor((Math.random() * (count + 1));
-
-
+    }
+    let index = zeroList[Math.Floor(Math.random() * (zeroList.size() + 1))];
+    gameGrid[newNumber]
   }
 
   render() {
