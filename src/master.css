@@ -1,10 +1,12 @@
 .container{
-  display: flex;
-  align-items: center;
-  align-content: center;
+  padding: 0px;
+  display: block;
+  align-items: flex-start;
   background-color: black;
   width: 100vw;
   height: 100vh;
+  padding-top: 32px !important;
+
 }
 
 .movingBlock{
@@ -13,12 +15,38 @@
   width: 25vh;
 }
 
+.header{
+  color: orange;
+  background-color: black;
+  margin: 0;
+  text-align: center;
+  padding-top: 45px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  padding-bottom: 0px;
+}
+
+.nameHeader{
+  color: yellow;
+  background-color: black;
+  margin: 0;
+  text-align: center;
+  padding-top: 15px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  padding-bottom: 0px;
+}
+
+
 
 /* Grid design */
 .containerGrid {
   margin: auto;
   display: -ms-grid;
   display: grid;
+  max-width: 46vh;
   opacity: 1;
   grid-template-columns: 10vh 10vh 10vh 10vh;
   grid-template-rows: 10vh 10vh 10vh 10vh;
@@ -26,52 +54,78 @@
   grid-row-gap: 2vh;
   padding: 2vh;
   border-radius: 2vh;
-  background: rgba(102, 102, 102, 0.6)
+  background: rgba(102, 102, 102, 0.6);
 }
 
 .cubeItem{
   justify-self: stretch;
   align-self: stretch;
-  background-color: orange;
+  background-color: #DDDDDD;
   grid-column: span 1;
   grid-row: span 1;
   border-radius: 1.5vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  -webkit-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+  box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
 }
 
-
-/* .gridHeader {
-  -ms-grid-column-span: 1;
-  grid-column: span 12;
-  -ms-grid-column-align: center;
-      justify-self: center;
-  -ms-flex-item-align: end;
-      -ms-grid-row-align: end;
-      align-self: end;
-  height: auto;
-}
-
-.gridItemHead {
-  -ms-grid-column-span: 4;
-  grid-column: span 4;
-  -ms-grid-column-align: center;
-      justify-self: center;
-  -ms-flex-item-align: start;
-      -ms-grid-row-align: start;
-      align-self: start;
+.cubeItem p{
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 2.5rem;
   font-weight: 700;
+  margin: auto;
   text-align: center;
 }
 
-.gridItemContent {
-  width: 80%;
-  margin: auto;
-  margin-top: 8px;
-  -ms-grid-column-span: 4;
-  grid-column: span 4;
-  -ms-grid-column-align: start;
-      justify-self: start;
-  -ms-flex-item-align: start;
-      -ms-grid-row-align: start;
-      align-self: start;
-  text-align: center;
-} */
+
+
+.defaultCube{
+  background-color: #808080;
+}
+
+.two{
+  background-color: #FFB3FF;
+}
+
+.four{
+  background-color: #B10DC9;
+}
+
+.eight{
+  background-color: #F012BE;
+}
+
+.sixteen{
+  background-color: #85144B;
+}
+
+.thirty-two{
+  background-color: #FF4136;
+}
+
+.sixty-four{
+  background-color: #FF851B;
+}
+
+.one-twenty-eight{
+  background-color: #FFDC00;
+}
+
+.two-fifty-six{
+  background-color: #01FF70;
+}
+
+.five-twelve{
+  background-color: #3D9970;
+}
+
+.ten-twenty-four{
+  background-color: #39CCCC;
+}
+
+.twenty-forty-eight{
+  background-color: #0074D9;
+}
