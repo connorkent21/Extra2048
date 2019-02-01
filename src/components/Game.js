@@ -57,17 +57,11 @@ class Game extends Component {
       ],
       formattedArray: [],
       gameStarted: false,
+      xLoc: 0,
+      yLoc: 0,
     };
-    this.mapArray = this.mapArray.bind(this);
-      this.startGame = this.startGame.bind(this);
-      this.handleKeyDown = this.handleKeyDown.bind(this);
-      this.invertArray = this.invertArray.bind(this);
-      this.handleNumberMoves = this.handleNumberMoves.bind(this);
-      this.revertArray = this.revertArray.bind(this);
-      this.addNumber = this.addNumber.bind(this);
-      this.newNumber = this.newNumber.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   };
-
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
@@ -231,10 +225,8 @@ class Game extends Component {
     return newNumber;
   }
   mapArray() {
-    let phatArray = [];
     this.state.gameGrid.forEach(row => {
       row.forEach(entry => {
-        phatArray.push(entry);
         this.state.formattedArray.push(entry);
         this.forceUpdate();
       })
@@ -242,22 +234,21 @@ class Game extends Component {
   }
 
   render() {
-    return(
-      <div>
-        <h1 className="header">2048 Game!</h1>
-        <p className="nameHeader">Created By: "The Building Scalars"</p>
-          <div className='container'>
-            <div className="containerGrid">
-              {this.state.formattedArray.map(entry => {
-                console.log("sting val: ", getString(entry));
-                return(
-                  <Cube value={entry} valueString={getString(entry)} />
-                )
-              })}
-            </div>
+      return(
+          <div>
+              <h1 className="header">2048 Game!</h1>
+              <p className="nameHeader">Created By: "The Building Scalars"</p>
+              <div className='container'>
+                  <div className="containerGrid">
+                      {this.state.formattedArray.map(entry => {
+                          return(
+                              <Cube value={entry} valueString={getString(entry)}/>
+                          )
+                      })}
+                  </div>
+              </div>
           </div>
-      </div>
-    )
+      )
   }
 }
 
