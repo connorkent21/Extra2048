@@ -50,7 +50,7 @@ class Game extends Component {
     super(props);
     this.state = {
       gameGrid: [
-        [256, 0, 0, 0],
+        [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
@@ -74,32 +74,156 @@ class Game extends Component {
 
       })
   }
-
   handleKeyDown(keyPress) {
-      if (keyPress.key === "ArrowLeft" && this.state.xLoc != 0){
-          this.state.xLoc -= 1;
-          this.state.gameGrid[this.state.yLoc][this.state.xLoc] = this.state.gameGrid[this.state.yLoc][this.state.xLoc+1];
-          this.state.gameGrid[this.state.yLoc][this.state.xLoc+1] = 0;
-      }
-      else if (keyPress.key === "ArrowRight" && this.state.xLoc != 3){
-          this.state.xLoc += 1;
-          this.state.gameGrid[this.state.yLoc][this.state.xLoc] = this.state.gameGrid[this.state.yLoc][this.state.xLoc-1];
-          this.state.gameGrid[this.state.yLoc][this.state.xLoc-1] = 0;
-      }
-      else if (keyPress.key === "ArrowUp" && this.state.yLoc != 0){
-          this.state.yLoc -= 1;
-          this.state.gameGrid[this.state.yLoc][this.state.xLoc] = this.state.gameGrid[this.state.yLoc+1][this.state.xLoc];
-          this.state.gameGrid[this.state.yLoc+1][this.state.xLoc] = 0;
-      }
-      else if (keyPress.key === "ArrowDown" && this.state.yLoc != 3){
-          this.state.yLoc += 1;
-          this.state.gameGrid[this.state.yLoc][this.state.xLoc] = this.state.gameGrid[this.state.yLoc-1][this.state.xLoc];
-          this.state.gameGrid[this.state.yLoc-1][this.state.xLoc] = 0;
-      }
-      this.state.formattedArray = [];
-      this.mapArray();
+    if(!this.state.gameStarted) {
+      this.startGame();
+    }
+    this.invertArray(keyPress.key);
+    this.handleNumberMoves();
+    this.revertArray(keyPress.key);
+    this.addNumber();
+
+    let outStr = "";
+    this.state.gameGrid.forEach(row => {
+      row.forEach(block => {
+        outStr += block + " ";
+      })
+      outStr += "\n";
+    })
+    console.log(outStr);
+    
   }
 
+  startGame() {
+    if (!this.state.gameStarted) {
+      for(let i = 0; i < 2; i++) {
+        this.addNumber();
+      }
+      this.state.gameStarted = 1;
+    }
+  }
+
+  invertArray(keyPress) {
+    console.log(keyPress);
+    let { gameGrid } = this.state;
+    let rotates;
+
+    if (keyPress == 'ArrowLeft') {
+      rotates = 0;
+    }
+    else if (keyPress == 'ArrowUp') {
+      rotates = 1;
+    }
+    else if (keyPress == 'ArrowRight') {
+      rotates = 2;
+    }
+    else if (keyPress == 'ArrowDown') {
+      rotates = 3;
+    }
+
+    for (var i = 0; i < rotates; i++) {
+      // Consider all squares one by one
+      for (let x = 0; x < this.state.gameGrid[0].length / 2; x++)
+      {
+        // Consider elements in group of 4 in
+        // current square
+        for (let y = x; y < this.state.gameGrid[0].length-x-1; y++)
+        {
+          // store current cell in temp variable
+          let temp = this.state.gameGrid[x][y];
+
+          // move values from right to top
+          this.state.gameGrid[x][y] = this.state.gameGrid[y][this.state.gameGrid[0].length-1-x];
+
+          // move values from bottom to right
+          this.state.gameGrid[y][this.state.gameGrid[0].length-1-x] = this.state.gameGrid[this.state.gameGrid[0].length-1-x][this.state.gameGrid[0].length-1-y];
+
+          // move values from left to bottom
+          this.state.gameGrid[this.state.gameGrid[0].length-1-x][this.state.gameGrid[0].length-1-y] = this.state.gameGrid[this.state.gameGrid[0].length-1-y][x];
+
+          // assign temp to left
+          this.state.gameGrid[this.state.gameGrid[0].length-1-y][x] = temp;
+        }
+      }
+    }
+  }
+
+  handleNumberMoves() {
+    let moved = false;
+    this.state.gameGrid.forEach(row => {
+
+      let emptyIndex = 1;
+      if (row[0] == 0)
+        emptyIndex = 0;
+      
+      for (let i = 1; i < row.length; i++) {
+
+        console.log(i + ": " + emptyIndex);
+        
+        if (row[i] == 0) {
+
+        }
+        // check if merge is possible
+        else if (row[i] == row[emptyIndex-1]) {
+          row[emptyIndex-1] *= 2;
+          row[i] = 0;
+          console.log("test");
+        }
+        // if emptyIndex does not equal index of block
+        // then move into emptyIndex
+        else if (emptyIndex != i) {
+          row[emptyIndex] = row[i];
+          row[i] = 0;
+          emptyIndex++;
+        } else {
+          emptyIndex++;
+        }
+      }
+    })
+  }
+
+  revertArray(keyPress){
+    let { gameGrid } = this.state;
+    let revertMove;
+
+    if (keyPress === 'ArrowLeft') {
+      revertMove = 'ArrowLeft';
+    }
+    else if (keyPress === 'ArrowDown') {
+      revertMove = 'ArrowUp';
+    }
+    else if (keyPress === 'ArrowRight') {
+      revertMove = 'ArrowRight';
+    }
+    else if (keyPress === 'ArrowUp') {
+      revertMove = 'ArrowDown';
+    }
+    this.invertArray(revertMove);
+  }
+
+  addNumber(){
+    let zeroList = [];
+    this.state.gameGrid.forEach(row => {
+      row.forEach(block => {
+        if (block == 0) {
+          zeroList.push(this.state.gameGrid.indexOf(row) * 4 + row.indexOf(block));
+        }
+      })
+    })
+
+    let newDigit = this.newNumber()
+    let index = zeroList[Math.floor(Math.random() * (zeroList.length))];
+    this.state.gameGrid[Math.floor(index / 4)][index % 4] = newDigit;
+  }
+
+  newNumber(){
+    let newNumber = 2;
+    let randomNumber =  Math.random() * 10;
+    if (Math.floor(randomNumber) == 0) {
+      newNumber = 4;
+    } 
+    return newNumber;
+  }
   mapArray() {
     this.state.gameGrid.forEach(row => {
       row.forEach(entry => {
