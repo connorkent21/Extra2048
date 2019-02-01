@@ -230,7 +230,6 @@ class Game extends Component {
     } 
     return newNumber;
   }
-
   mapArray() {
     let phatArray = [];
     this.state.gameGrid.forEach(row => {

@@ -1,0 +1,129 @@
+.container{
+  padding: 0px;
+  display: block;
+  align-items: flex-start;
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 32px !important;
+
+}
+
+.movingBlock{
+  background-color: red;
+  height: 25vh;
+  width: 25vh;
+}
+
+.header{
+  color: orange;
+  background-color: black;
+  margin: 0;
+  text-align: center;
+  padding-top: 45px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  padding-bottom: 0px;
+}
+
+.nameHeader{
+  color: yellow;
+  background-color: black;
+  margin: 0;
+  text-align: center;
+  padding-top: 15px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  padding-bottom: 0px;
+}
+
+
+
+/* Grid design */
+.containerGrid {
+  margin: auto;
+  display: -ms-grid;
+  display: grid;
+  max-width: 46vh;
+  opacity: 1;
+  grid-template-columns: 10vh 10vh 10vh 10vh;
+  grid-template-rows: 10vh 10vh 10vh 10vh;
+  grid-column-gap: 2vh;
+  grid-row-gap: 2vh;
+  padding: 2vh;
+  border-radius: 2vh;
+  background: rgba(102, 102, 102, 0.6);
+}
+
+.cubeItem{
+  justify-self: stretch;
+  align-self: stretch;
+  background-color: #DDDDDD;
+  grid-column: span 1;
+  grid-row: span 1;
+  border-radius: 1.5vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  -webkit-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+  box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+}
+
+.cubeItem p{
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: auto;
+  text-align: center;
+}
+
+.defaultCube{
+  background-color: #DDDDDD;
+}
+
+.two{
+  background-color: #00E5D0;
+}
+
+.four{
+  background-color: #069FE7;
+}
+
+.eight{
+  background-color: #0E48EA;
+}
+
+.sixteen{
+  background-color: #6B00E5;
+}
+
+.thirty-two{
+  background-color: #AA00E5;
+}
+
+.sixty-four{
+  background-color: #EC24F2;
+}
+
+.one-twenty-eight{
+  background-color: #F42CA7;
+}
+
+.two-fifty-six{
+  background-color: #F7345C;
+}
+
+.five-twelve{
+  background-color: #F9633C;
+}
+
+.ten-twenty-four{
+  background-color: #FCB644;
+}
+
+.twenty-forty-eight{
+  background-color: #F9FF4D;
+}
