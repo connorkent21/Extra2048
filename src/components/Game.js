@@ -244,9 +244,11 @@ class Game extends Component {
   }
 
   checkGameOver(){
-    let isOver = true;
     for (let row = 0; row < 4; row++) {
       for (let col = 0; col < 4; col++) {
+        if(this.state.gameGrid[row][col] == 0){
+          return;
+        }
         if(col < 3 && this.state.gameGrid[row][col] == this.state.gameGrid[row][col + 1]){
           return;
         }
@@ -255,9 +257,7 @@ class Game extends Component {
         }
       }
     }
-    if (!isOver) {
-      this.state.gameEnd = true;
-    }
+    this.state.gameEnd = true;
   }
   
   mapArray() {
