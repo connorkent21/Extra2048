@@ -90,7 +90,7 @@ class Game extends Component {
       this.mapArray();
       this.printArrayToConsole();
     }
-    console.log(this.state.gameEnd);
+    console.log(this.state.score);
     if (this.state.gameEnd) {
       console.log("Game Over!")
     }
@@ -181,6 +181,7 @@ class Game extends Component {
         // check if merge is possible
         else if (row[i] == row[emptyIndex-1]) {
           row[emptyIndex-1] *= 2;
+          this.state.score += row[emptyIndex-1];
           row[i] = 0;
           keyMoved = true;
           // console.log("test");
