@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cube from "./Cube";
+import NavBar from './NavBar';
 
 function getString(num){
   let name = "";
@@ -240,9 +241,12 @@ class Game extends Component {
   render() {
       return(
           <div>
-              <h1 className="header">2048 Game!</h1>
-              <p className="nameHeader">Created By: "The Building Scalars"</p>
+            <NavBar />
               <div className='container'>
+                <h1 style={{color:'white', width: '100%', textAlign: 'center', margin: 'auto'}}>
+                  2048
+                </h1>
+                <div className='flexContainer'>
                   <div className="containerGrid">
                       {this.state.formattedArray.map(entry => {
                           return(
@@ -250,6 +254,8 @@ class Game extends Component {
                           )
                       })}
                   </div>
+                </div>
+
               </div>
           </div>
       )
