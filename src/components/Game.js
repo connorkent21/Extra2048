@@ -57,6 +57,8 @@ class Game extends Component {
       ],
       formattedArray: [],
       gameStarted: false,
+      gameEnd:false,
+      score: 0,
       xLoc: 0,
       yLoc: 0,
     };
@@ -78,21 +80,31 @@ class Game extends Component {
     if(!this.state.gameStarted) {
       this.startGame();
     }
-    this.invertArray(keyPress.key);
-    this.handleNumberMoves();
-    this.revertArray(keyPress.key);
-    this.addNumber();
-    this.mapArray();
+    if(!this.state.gameEnd) {
+      this.invertArray(keyPress.key);
+      if (this.handleNumberMoves()) {
+        this.addNumber();
+      }
+      this.revertArray(keyPress.key);
+      this.checkGameOver();
+      this.mapArray();
+      this.printArrayToConsole();
+    }
+    console.log(this.state.gameEnd);
+    if (this.state.gameEnd) {
+      console.log("Game Over!")
+    }
+  }
 
+  printArrayToConsole() {
     let outStr = "";
     this.state.gameGrid.forEach(row => {
       row.forEach(block => {
         outStr += block + " ";
-      })
+      });
       outStr += "\n";
-    })
-    console.log(outStr, 'this is the state: ', this.state);
-
+    });
+    console.log(outStr);
   }
 
   startGame() {
@@ -100,7 +112,9 @@ class Game extends Component {
       for(let i = 0; i < 2; i++) {
         this.addNumber();
       }
-      this.state.gameStarted = 1;
+      this.setState({
+        gameStarted: true,
+      });
     }
   }
 
@@ -150,17 +164,17 @@ class Game extends Component {
   }
 
   handleNumberMoves() {
-    let moved = false;
+    let keyMoved = false;
     this.state.gameGrid.forEach(row => {
 
       let emptyIndex = 1;
       if (row[0] == 0)
         emptyIndex = 0;
-
+      
       for (let i = 1; i < row.length; i++) {
 
-        console.log(i + ": " + emptyIndex);
-
+        // console.log(i + ": " + emptyIndex);
+        
         if (row[i] == 0) {
 
         }
@@ -168,7 +182,8 @@ class Game extends Component {
         else if (row[i] == row[emptyIndex-1]) {
           row[emptyIndex-1] *= 2;
           row[i] = 0;
-          console.log("test");
+          keyMoved = true;
+          // console.log("test");
         }
         // if emptyIndex does not equal index of block
         // then move into emptyIndex
@@ -176,11 +191,13 @@ class Game extends Component {
           row[emptyIndex] = row[i];
           row[i] = 0;
           emptyIndex++;
+          keyMoved = true;
         } else {
           emptyIndex++;
         }
       }
     })
+    return keyMoved;
   }
 
   revertArray(keyPress){
@@ -225,6 +242,24 @@ class Game extends Component {
     }
     return newNumber;
   }
+
+  checkGameOver(){
+    let isOver = true;
+    for (let row = 0; row < 4; row++) {
+      for (let col = 0; col < 4; col++) {
+        if(col < 3 && this.state.gameGrid[row][col] == this.state.gameGrid[row][col + 1]){
+          return;
+        }
+        if(row < 3 && this.state.gameGrid[row][col] == this.state.gameGrid[row+1][col]){
+          return;
+        }
+      }
+    }
+    if (!isOver) {
+      this.state.gameEnd = true;
+    }
+  }
+  
   mapArray() {
     this.setState({formattedArray: []}, () => {
       this.state.gameGrid.forEach(row => {
