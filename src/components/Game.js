@@ -82,6 +82,7 @@ class Game extends Component {
     this.handleNumberMoves();
     this.revertArray(keyPress.key);
     this.addNumber();
+    this.mapArray();
 
     let outStr = "";
     this.state.gameGrid.forEach(row => {
@@ -90,8 +91,8 @@ class Game extends Component {
       })
       outStr += "\n";
     })
-    console.log(outStr);
-    
+    console.log(outStr, 'this is the state: ', this.state);
+
   }
 
   startGame() {
@@ -155,11 +156,11 @@ class Game extends Component {
       let emptyIndex = 1;
       if (row[0] == 0)
         emptyIndex = 0;
-      
+
       for (let i = 1; i < row.length; i++) {
 
         console.log(i + ": " + emptyIndex);
-        
+
         if (row[i] == 0) {
 
         }
@@ -221,16 +222,19 @@ class Game extends Component {
     let randomNumber =  Math.random() * 10;
     if (Math.floor(randomNumber) == 0) {
       newNumber = 4;
-    } 
+    }
     return newNumber;
   }
   mapArray() {
-    this.state.gameGrid.forEach(row => {
-      row.forEach(entry => {
-        this.state.formattedArray.push(entry);
-        this.forceUpdate();
-      })
-    });
+    this.setState({formattedArray: []}, () => {
+      this.state.gameGrid.forEach(row => {
+        row.forEach(entry => {
+          this.state.formattedArray.push(entry);
+          this.forceUpdate();
+        })
+      });
+    })
+
   }
 
   render() {
