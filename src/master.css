@@ -90,6 +90,7 @@ h1 {
   -webkit-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
   box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+  transition: all .25 ease-in-out
 }
 
 .cubeItem p{

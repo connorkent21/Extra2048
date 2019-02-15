@@ -250,7 +250,7 @@ class Game extends Component {
                   <div className="containerGrid">
                       {this.state.formattedArray.map(entry => {
                           return(
-                              <Cube value={entry} valueString={getString(entry)}/>
+                              <Cube id={this.state.formattedArray.indexOf(entry)} value={entry} valueString={getString(entry)}/>
                           )
                       })}
                   </div>
