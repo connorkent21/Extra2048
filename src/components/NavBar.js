@@ -44,22 +44,22 @@ function NavBar(props) {
         <AppBar position="static">
           <Toolbar classnName={classes.root}>
             <div className='baseSelector'>
-              <Button color={page.state.base == 10 ? 'inherit' : 'secondary'} className={page.state.base == 10 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+              <Button color={page.state.base == 10 ? 'inherit' : 'secondary'} disabled={page.state.gameStarted && page.state.base !== 10} className={page.state.base == 10 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
                   page.setState({base: 10})
                 }
               }
               >Decimal</Button>
-            <Button color={page.state.base == 2 ? 'inherit' : 'secondary'} className={page.state.base == 2 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+            <Button color={page.state.base == 2 ? 'inherit' : 'secondary'} disabled={page.state.gameStarted && page.state.base !== 2} className={page.state.base == 2 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
                   page.setState({base: 2})
                 }
               }
               >Binary</Button>
-            <Button color={page.state.base == 16 ? 'inherit' : 'secondary'} className={page.state.base == 16 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+            <Button color={page.state.base == 16 ? 'inherit' : 'secondary'} disabled={page.state.gameStarted && page.state.base !== 16} className={page.state.base == 16 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
                   page.setState({base: 16})
                 }
               }
               >Hex</Button>
-            <Button color={page.state.base == 8 ? 'inherit' : 'secondary'} className={page.state.base == 8 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+            <Button color={page.state.base == 8 ? 'inherit' : 'secondary'} disabled={page.state.gameStarted && page.state.base !== 8} className={page.state.base == 8 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
                   page.setState({base: 8})
                 }
               }
