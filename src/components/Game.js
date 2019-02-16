@@ -301,13 +301,20 @@ class Game extends Component {
 
                 </div>
                 <h1 style={{color:'white', width: '100%', textAlign: 'center', margin: 'auto'}}>
-                  <Wave
-                    text={title.toString(this.state.base)}
-                    iterations={1}
-                    effect="verticalFadeIn"
-                    effectChange={.5}
-                    effectDuration={.2}
-                  />
+                  {
+                    this.state.gameStarted
+                    ?
+                    title.toString(this.state.base)
+                    :
+                    ( <Wave
+                        text={title.toString(this.state.base)}
+                        iterations={1}
+                        effect="verticalFadeIn"
+                        effectChange={.5}
+                        effectDuration={.2}
+                      />
+                    )
+                  }
                 </h1>
                 <div className='flexContainer'>
                   <div style={{display: !this.state.gameStarted ? 'none' : 'block'}}>
