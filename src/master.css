@@ -1,5 +1,5 @@
 #root {
-  max-width: 100vw;
+  max-width: 100%;
   max-height: 100vh;
   position: fixed;
   overflow-x: hidden;
@@ -10,7 +10,7 @@
   padding: 0px;
   display: block;
   align-items: flex-start;
-  background-color: black;
+  background-color: #17172a;
   width: 100vw;
   height: 100vh;
   padding-top: 32px !important;
@@ -36,7 +36,7 @@
 
 .nameHeader{
   color: yellow;
-  background-color: black;
+  background-color: #161734;
   margin: 0;
   text-align: center;
   padding-top: 15px;
@@ -61,7 +61,21 @@
   grid-row-gap: 2vh;
   padding: 2vh;
   border-radius: 2vh;
-  background: rgba(102, 102, 102, 0.6);
+  background: rgba(57,63,77, 0.8);
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 0px;
+  width: 100%;
+}
+
+h1 {
+  font-family: 'Major Mono Display', monospace;
+  font-size: 4rem;
+  transition: all .3s;
 }
 
 .cubeItem{
@@ -77,14 +91,29 @@
   -webkit-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
   box-shadow: 6px 5px 33px -8px rgba(0,0,0,0.75);
+  transition: all .25 ease-in-out
+}
+
+.binary p{
+  font-size: 1rem !important;
+}
+
+.particles {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  transition: all .3s !important;
 }
 
 .cubeItem p{
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 2.5rem;
+  font-family: 'Major Mono Display', monospace;
+  color: white;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: auto;
   text-align: center;
+  transition: all .15s;
 }
 
 .defaultCube{
@@ -133,4 +162,11 @@
 
 .twenty-forty-eight{
   background-color: #F9FF4D;
+}
+
+.baseSelector {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
