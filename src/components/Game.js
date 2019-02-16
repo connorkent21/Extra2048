@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cube from "./Cube";
 import NavBar from './NavBar';
+import ParticleBG from './Particles';
 
 function getString(num){
   let name = "";
@@ -62,13 +63,14 @@ class Game extends Component {
       score: 0,
       xLoc: 0,
       yLoc: 0,
+      base: 16,
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
   };
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
-    this.mapArray();
+    this.mapArray(16);
   }
 
   componentWillUnmount() {
@@ -171,11 +173,11 @@ class Game extends Component {
       let emptyIndex = 1;
       if (row[0] == 0)
         emptyIndex = 0;
-      
+
       for (let i = 1; i < row.length; i++) {
 
         // console.log(i + ": " + emptyIndex);
-        
+
         if (row[i] == 0) {
 
         }
@@ -261,11 +263,12 @@ class Game extends Component {
     }
     this.state.gameEnd = true;
   }
-  
+
   mapArray() {
     this.setState({formattedArray: []}, () => {
       this.state.gameGrid.forEach(row => {
         row.forEach(entry => {
+
           this.state.formattedArray.push(entry);
           this.forceUpdate();
         })
@@ -275,18 +278,19 @@ class Game extends Component {
   }
 
   render() {
+    const title = 2048;
       return(
           <div>
-            <NavBar />
+            <NavBar page={this}/>
               <div className='container'>
                 <h1 style={{color:'white', width: '100%', textAlign: 'center', margin: 'auto'}}>
-                  2048
+                  {title.toString(this.state.base)}
                 </h1>
                 <div className='flexContainer'>
                   <div className="containerGrid">
                       {this.state.formattedArray.map(entry => {
                           return(
-                              <Cube id={this.state.formattedArray.indexOf(entry)} value={entry} valueString={getString(entry)}/>
+                              <Cube id={this.state.formattedArray.indexOf(entry)} page={this} base={this.state.base} value={entry} valueString={getString(entry)}/>
                           )
                       })}
                   </div>

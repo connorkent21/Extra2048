@@ -17,7 +17,10 @@ const styles = {
   },
   ogDiv: {
     flexGrow: 1,
-  }
+  },
+  button: {
+    transition: 'all .3s,'
+  },
 };
 
 const theme = createMuiTheme({
@@ -33,7 +36,7 @@ const theme = createMuiTheme({
 });
 
 function NavBar(props) {
-  const { classes } = props;
+  const { classes, page } = props;
 
   return (
     <MuiThemeProvider theme={theme} >
@@ -41,12 +44,26 @@ function NavBar(props) {
         <AppBar position="static">
           <Toolbar classnName={classes.root}>
             <div className='baseSelector'>
-              <Button color="secondary" variant="outlined">Decimal</Button>
-              <Button color="secondary" variant="outlined">Binary</Button>
-              <Button color="secondary" variant="outlined">Hex</Button>
-              <Button color="secondary" variant="outlined">Octal</Button>
-              <Button color="inherit" variant="outlined">36</Button>
-              <Button color="secondary" variant="outlined">62</Button>
+              <Button color={page.state.base == 10 ? 'inherit' : 'secondary'} className={page.state.base == 10 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+                  page.setState({base: 10})
+                }
+              }
+              >Decimal</Button>
+            <Button color={page.state.base == 2 ? 'inherit' : 'secondary'} className={page.state.base == 2 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+                  page.setState({base: 2})
+                }
+              }
+              >Binary</Button>
+            <Button color={page.state.base == 16 ? 'inherit' : 'secondary'} className={page.state.base == 16 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+                  page.setState({base: 16})
+                }
+              }
+              >Hex</Button>
+            <Button color={page.state.base == 8 ? 'inherit' : 'secondary'} className={page.state.base == 8 ? `${classes.selected} button` : 'button' } variant="outlined" onClick={() => {
+                  page.setState({base: 8})
+                }
+              }
+              >Octal</Button>
             </div>
           </Toolbar>
         </AppBar>

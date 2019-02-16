@@ -25,9 +25,10 @@ class Cube extends Component{
   };
 
   render(){
+    console.log('this is the hex number:', this.props.value.toString(this.props.base));
     return(
-      <div className={`cubeItem ${this.props.valueString}`}>
-        <p>{this.props.value ? this.props.value : ""}</p>
+      <div className={this.props.page.state.base == 2 ? `cubeItem ${this.props.valueString} binary` : `cubeItem ${this.props.valueString}`}>
+        <p>{this.props.value ? this.props.value.toString(this.props.base) : ""}</p>
       </div>
     )
   }
