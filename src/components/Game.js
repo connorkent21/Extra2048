@@ -5,6 +5,7 @@ import ParticleBG from './Particles';
 import Fade from 'react-reveal/Fade';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { Wave } from 'react-animated-text';
 
 function getString(num){
   let name = "";
@@ -300,7 +301,13 @@ class Game extends Component {
 
                 </div>
                 <h1 style={{color:'white', width: '100%', textAlign: 'center', margin: 'auto'}}>
-                  {title.toString(this.state.base)}
+                  <Wave
+                    text={title.toString(this.state.base)}
+                    iterations={1}
+                    effect="verticalFadeIn"
+                    effectChange={.5}
+                    effectDuration={.2}
+                  />
                 </h1>
                 <div className='flexContainer'>
                   <div style={{display: !this.state.gameStarted ? 'none' : 'block'}}>
