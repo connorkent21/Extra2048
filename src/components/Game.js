@@ -50,6 +50,23 @@ function getString(num){
   return name;
 }
 
+const initialState = {
+  gameGrid: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ],
+  formattedArray: [],
+  gameStarted: false,
+  gameEnd:false,
+  score: 0,
+  xLoc: 0,
+  yLoc: 0,
+  base: 10,
+  start: false,
+};
+
 
 class Game extends Component {
   constructor(props) {
@@ -76,7 +93,7 @@ class Game extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
-    this.mapArray(16);
+    this.mapArray();
   }
 
   componentWillUnmount() {
@@ -292,7 +309,11 @@ class Game extends Component {
             <NavBar page={this}/>
               <div className='container'>
                 <div className='scoreBox'>
-                  <div className='resetButton'>
+                  <div className='resetButton' onClick={() => {
+                      console.log('this is the initial state: ', initialState);
+                      this.setState(initialState);
+                      this.mapArray();
+                    }}>
                     <FontAwesomeIcon icon={faSync} size='lg' className='resetIcon' />
                   </div>
                   <h2>
