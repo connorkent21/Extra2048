@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Cube from "./Cube";
 import NavBar from './NavBar';
 import ParticleBG from './Particles';
+import Fade from 'react-reveal/Fade';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { Wave } from 'react-animated-text';
 
 function getString(num){
   let name = "";
@@ -46,6 +50,13 @@ function getString(num){
   return name;
 }
 
+const emptyGrid = [
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+];
+
 
 class Game extends Component {
   constructor(props) {
@@ -63,14 +74,15 @@ class Game extends Component {
       score: 0,
       xLoc: 0,
       yLoc: 0,
-      base: 16,
+      base: 10,
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.startGame = this.startGame.bind(this);
   };
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
-    this.mapArray(16);
+    this.mapArray();
   }
 
   componentWillUnmount() {
@@ -80,22 +92,24 @@ class Game extends Component {
       })
   }
   handleKeyDown(keyPress) {
-    if(!this.state.gameStarted) {
-      this.startGame();
-    }
-    if(!this.state.gameEnd) {
-      this.invertArray(keyPress.key);
-      if (this.handleNumberMoves()) {
-        this.addNumber();
+    if(keyPress.key == 'ArrowLeft' || keyPress.key == 'ArrowUp' || keyPress.key == 'ArrowDown' || keyPress.key == 'ArrowRight' ){
+      if(!this.state.gameStarted) {
+        this.startGame();
       }
-      this.revertArray(keyPress.key);
-      this.checkGameOver();
-      this.mapArray();
-      this.printArrayToConsole();
-    }
-    console.log(this.state.score);
-    if (this.state.gameEnd) {
-      console.log("Game Over!")
+      if(!this.state.gameEnd) {
+        this.invertArray(keyPress.key);
+        if (this.handleNumberMoves()) {
+          this.addNumber();
+        }
+        this.revertArray(keyPress.key);
+        this.checkGameOver();
+        this.mapArray();
+        this.printArrayToConsole();
+      }
+      console.log(this.state.score);
+      if (this.state.gameEnd) {
+        console.log("Game Over!")
+      }
     }
   }
 
@@ -283,17 +297,55 @@ class Game extends Component {
           <div>
             <NavBar page={this}/>
               <div className='container'>
+                <div className='scoreBox'>
+                  <div className='resetButton' onClick={() => {
+                      window.location.reload();
+                  }}>
+                    <FontAwesomeIcon icon={faSync} size='lg' className='resetIcon' />
+                  </div>
+                  <h2>
+                    Score: {this.state.score}
+                  </h2>
+
+                </div>
                 <h1 style={{color:'white', width: '100%', textAlign: 'center', margin: 'auto'}}>
-                  {title.toString(this.state.base)}
+                  {
+                    this.state.gameStarted
+                    ?
+                    title.toString(this.state.base)
+                    :
+                    ( <Wave
+                        text={title.toString(this.state.base)}
+                        iterations={1}
+                        effect="verticalFadeIn"
+                        effectChange={.5}
+                        effectDuration={.2}
+                      />
+                    )
+                  }
                 </h1>
                 <div className='flexContainer'>
-                  <div className="containerGrid">
-                      {this.state.formattedArray.map(entry => {
-                          return(
-                              <Cube id={this.state.formattedArray.indexOf(entry)} page={this} base={this.state.base} value={entry} valueString={getString(entry)}/>
-                          )
-                      })}
+                  <div style={{display: !this.state.gameStarted ? 'none' : 'block'}}>
+                    <Fade when={this.state.gameStarted}>
+                      <div className="containerGrid">
+                          {this.state.formattedArray.map(entry => {
+                              return(
+                                  <Cube id={this.state.formattedArray.indexOf(entry)} page={this} base={this.state.base} value={entry} valueString={getString(entry)}/>
+                              )
+                          })}
+                      </div>
+                    </Fade>
                   </div>
+                  <div style={{display: this.state.gameStarted ? 'none' : 'block'}}>
+                    <Fade when={!this.state.gameStarted} >
+                      <div className='startBox'>
+                        <div className='startButton' onClick={this.startGame}>
+                          {`start the game in base ${this.state.base}`}
+                        </div>
+                      </div>
+                    </Fade>
+                  </div>
+
                 </div>
 
               </div>
