@@ -325,8 +325,8 @@ class Game extends Component {
                   }
                 </h1>
                 <div className='flexContainer'>
-                  <div style={{display: !this.state.gameStarted ? 'none' : 'block'}}>
-                    <Fade when={this.state.gameStarted}>
+                  <div style={{display: (!this.state.gameStarted || this.state.gameEnd) ? 'none' : 'block'}}>
+                    <Fade when={this.state.gameStarted || this.gameEnd}>
                       <div className="containerGrid">
                           {this.state.formattedArray.map(entry => {
                               return(
@@ -336,11 +336,30 @@ class Game extends Component {
                       </div>
                     </Fade>
                   </div>
-                  <div style={{display: this.state.gameStarted ? 'none' : 'block'}}>
+                  <div style={{display: (this.state.gameStarted || this.state.gameEnd) ? 'none' : 'block'}}>
                     <Fade when={!this.state.gameStarted} >
                       <div className='startBox'>
                         <div className='startButton' onClick={this.startGame}>
                           {`start the game in base ${this.state.base}`}
+                        </div>
+                      </div>
+                    </Fade>
+                  </div>
+
+                  <div style={{display: this.state.gameEnd ? 'block' : 'none'}}>
+                    <Fade>
+                      <div className='endBox endMessage'>
+                        <Wave
+                            text={'game over'}
+                            iterations={1}
+                            effect="verticalFadeIn"
+                            effectChange={.5}
+                            effectDuration={.2}
+                          />
+                        <div className='resetButtonEnd' onClick={() => {
+                            window.location.reload();
+                        }}>
+                          <FontAwesomeIcon icon={faSync} size='2x' className='resetIcon' />
                         </div>
                       </div>
                     </Fade>
