@@ -6,6 +6,7 @@ import Fade from 'react-reveal/Fade';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 import { Wave } from 'react-animated-text';
+import DocumentTitle from 'react-document-title';
 
 function getString(num){
   let name = "";
@@ -294,6 +295,7 @@ class Game extends Component {
   render() {
     const title = 2048;
       return(
+        <DocumentTitle title={title.toString(this.state.base)}>
           <div>
             <NavBar page={this}/>
               <div className='container'>
@@ -369,6 +371,7 @@ class Game extends Component {
 
               </div>
           </div>
+        </DocumentTitle>
       )
   }
 }

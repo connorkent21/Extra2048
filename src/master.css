@@ -273,3 +273,11 @@ h1 {
    border-radius: 5px;
    transition: all .3s;
  }
+
+
+
+ @media only screen and (max-width: 800px) {
+    .scoreBox {
+      display: none;
+    }
+ }

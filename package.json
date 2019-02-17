@@ -12,6 +12,7 @@
     "npm": "^6.8.0",
     "react": "^16.7.0",
     "react-animated-text": "^0.1.4",
+    "react-document-title": "^2.0.3",
     "react-dom": "^16.7.0",
     "react-particles-js": "^2.4.2",
     "react-reveal": "^1.2.2",
